@@ -14,6 +14,7 @@ Route::prefix('/dashboard')->group(function () {
     Route::get('/events', [EventController::class, 'create'])->name('events');
     Route::post('/events', [EventController::class, 'store'])->name('events.store');
     Route::post('/events/{id}', [EventController::class, 'update'])->name('events.update');
+    Route::get('/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
 
     Route::get('/attendees', function () {
         return view('dashboard.attendees');
