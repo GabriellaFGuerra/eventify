@@ -53,6 +53,8 @@ class UserController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
+            $user = User::where('email', $request->input('email'))->first();
+            Auth::login($user);
             $request->session()->regenerate();
             return redirect()->intended('dashboard');
         }
@@ -63,9 +65,10 @@ class UserController extends Controller
         ]);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
+        $request->session()->regenerate();
         return redirect('login');
     }
 
