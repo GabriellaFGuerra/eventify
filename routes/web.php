@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,15 +9,16 @@ Route::get('/', function () {
 });
 
 Route::prefix('/dashboard')->group(function () {
-    Route::get('/', function () {
-        return view('dashboard.dashboard');
-    })->name('dashboard');
-    Route::get('/events', function () {
-        return view('dashboard.events');
-    })->name('events');
+    Route::get('/', [EventController::class, 'index'])->name('dashboard');
+
+    Route::get('/events', [EventController::class, 'create'])->name('events');
+    Route::post('/events', [EventController::class, 'store'])->name('events.store');
+    Route::post('/events/{id}', [EventController::class, 'update'])->name('events.update');
+
     Route::get('/attendees', function () {
         return view('dashboard.attendees');
     })->name('attendees');
+
     Route::get('/settings', function () {
         return view('dashboard.settings');
     })->name('settings');
