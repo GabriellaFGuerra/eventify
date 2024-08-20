@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Ticket;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 
 class EventController extends Controller
 {
@@ -12,7 +16,10 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::where('user_id', Auth::id());
+        $tickets = Ticket::find('event_id');
+
+        return view('dashboard.dashboard', ['events' => $events, 'tickets' => $tickets]);
     }
 
     /**
@@ -20,7 +27,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        $events = Event::all();
+        return view('dashboard.events', ['events' => $events]);
     }
 
     /**
@@ -28,7 +36,26 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'event_name' => 'required',
+            'event_description' => 'required',
+            'event_datetime' => 'required',
+            'event_location' => 'required'
+        ]);
+
+        $event = new Event();
+
+        $event->name = $request->input('event_name');
+        $event->description = $request->input('event_description');
+        $event->date_time = $request->input('event_datetime');
+        $event->location = $request->input('event_location');
+        $event->user_id = 1;
+
+        if ($event->save()) {
+            return redirect()->route('events')->with('success', 'Event created successfully.');
+        } else {
+            return Redirect::back()->withErrors($request->errors())->withInput($request->all());
+        }
     }
 
     /**
