@@ -39,22 +39,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>john.doe@gmail.com</td>
-                        <td>+55 13 99999-9999</td>
-                        <td>Fest</td>
-                        <td>5 stars</td>
-                    </tr>
-                    {{-- @foreach ($attendees as $attendee)
-                    <tr>
-                        <td>{{ $attendee->name }}</td>
-                        <td>{{ $attendee->email }}</td>
-                        <td>{{ $attendee->phone }}</td>
-                        <td>{{ $attendee->event->name }}</td>
-                        <td>{{ $attendee->feedback }}</td>
-                    </tr>
-                @endforeach --}}
+                    @isset($attendees)
+                        @foreach ($attendees as $attendee)
+                            <tr>
+                                <td>{{ $attendee->user()->name }}</td>
+                                <td>{{ $attendee->user()->email }}</td>
+                                <td>{{ $attendee->user()->phone }}</td>
+                                <td>{{ $attendee->event()->name }}</td>
+                                <td>{{ $attendee->feedback }}</td>
+                            </tr>
+                        @endforeach
+                    @endisset
                 </tbody>
             </table>
         </div>

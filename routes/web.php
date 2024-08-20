@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AttendeeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,9 +17,7 @@ Route::prefix('/dashboard')->group(function () {
     Route::post('/events/{id}', [EventController::class, 'update'])->name('events.update');
     Route::get('/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
 
-    Route::get('/attendees', function () {
-        return view('dashboard.attendees');
-    })->name('attendees');
+    Route::get('/attendees', [AttendeeController::class, 'index'])->name('attendees');
 
     Route::get('/settings', function () {
         return view('dashboard.settings');
