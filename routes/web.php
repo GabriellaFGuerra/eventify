@@ -3,10 +3,11 @@
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AttendeeController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('homepage');
+Route::get('/login', function () {
+    return view('login');
 });
 
 Route::prefix('/dashboard')->group(function () {
@@ -18,11 +19,15 @@ Route::prefix('/dashboard')->group(function () {
     Route::get('/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
 
     Route::get('/attendees', [AttendeeController::class, 'index'])->name('attendees');
+})->middleware([\App\Http\Middleware\AdminUser::class], 'auth');
 
-    Route::get('/settings', function () {
-        return view('dashboard.settings');
-    })->name('settings');
+Route::get('/', [TicketController::class, 'index'])->name('homepage');
+Route::prefix('/')->group(function () {
+    Route::get('/tickets', [TicketController::class, 'create'])->name('tickets');
+    Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
 })->middleware('auth');
+
+
 
 
 Route::get('/signup', function () {

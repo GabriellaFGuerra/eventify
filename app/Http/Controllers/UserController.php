@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -56,7 +57,12 @@ class UserController extends Controller
             $user = User::where('email', $request->input('email'))->first();
             Auth::login($user);
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+
+            if (Auth::user()->user_type == 'admin') {
+                return redirect()->intended('dashboard');
+            } else {
+                return redirect()->intended('/');
+            }
         }
 
         return back()->withInput($request->all())->withErrors([

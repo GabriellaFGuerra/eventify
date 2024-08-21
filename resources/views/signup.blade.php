@@ -11,6 +11,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden;
         }
 
         .signup-form {
@@ -58,7 +59,6 @@
                         <h2 class="text-center mb-4">Sign Up</h2>
                         <form action="/signup" method="POST">
                             @csrf
-                            <input type="hidden" name="type" value="user">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
                                 <input type="text" class="form-control" name="name" id="name"
@@ -70,6 +70,13 @@
                                     placeholder="Enter your email" value="{{ old('email') }}">
                             </div>
                             <div class="mb-3">
+                                <label for="type" class="form-label">Are you an Event Organizer or a User?</label>
+                                <select name="type" class="form-select" id="type">
+                                    <option value="admin">Organizer</option>
+                                    <option value="user">User</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" class="form-control" name="password" id="password"
                                     placeholder="Enter your password">
@@ -79,7 +86,11 @@
                                 <input type="password" class="form-control" name="confirmPassword" id="confirmPassword"
                                     placeholder="Confirm your password">
                             </div>
+
                             <div class="d-grid gap-2">
+                                <div class="mb-3">
+                                    <a href="/login" class="text-decoration-none">Already have an account? Login here</a>
+                                </div>
                                 <button type="submit" class="btn btn-primary">Sign Up</button>
                             </div>
                         </form>

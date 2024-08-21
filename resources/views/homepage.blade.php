@@ -44,6 +44,7 @@
             @endif
         </div>
     </nav>
+
     <style>
         .hero-section {
             background: url('https://via.placeholder.com/1600x600') no-repeat center center;
@@ -75,39 +76,19 @@
         <div class="container">
             <h2 class="text-center mb-4">Upcoming Events</h2>
             <div class="row">
-                <!-- Event Card 1 -->
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="Event Image">
-                        <div class="card-body">
-                            <h5 class="card-title">Concert Night</h5>
-                            <p class="card-text">Join us for an unforgettable night of music and entertainment.</p>
-                            <a href="#tickets" class="btn btn-primary">Buy Tickets</a>
+                @foreach ($events as $event)
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $event->name }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Organizerd by: {{ $event->user->name }}</h6>
+                                <p class="card-text">{{ $event->description }}</p>
+                                <p class="card-text">{{ $event->date }}</p>
+                                <a href="#tickets" class="btn btn-primary">Buy Tickets</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- Event Card 2 -->
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="Event Image">
-                        <div class="card-body">
-                            <h5 class="card-title">Art Exhibition</h5>
-                            <p class="card-text">Explore a wide range of artworks from talented artists.</p>
-                            <a href="#tickets" class="btn btn-primary">Buy Tickets</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Event Card 3 -->
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="Event Image">
-                        <div class="card-body">
-                            <h5 class="card-title">Food Festival</h5>
-                            <p class="card-text">Taste delicious food from local vendors and chefs.</p>
-                            <a href="#tickets" class="btn btn-primary">Buy Tickets</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

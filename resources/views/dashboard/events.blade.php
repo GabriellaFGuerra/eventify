@@ -16,9 +16,6 @@
                 <a class="nav-link" href="/dashboard/attendees"><i class="fas fa-users"></i> Attendees</a>
             </li>
             <li class="nav-item p-3">
-                <a class="nav-link" href="/dashboard/settings"><i class="fas fa-cogs"></i> Settings</a>
-            </li>
-            <li class="nav-item p-3">
                 <a href="/logout" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </li>
         </ul>
@@ -54,7 +51,7 @@
                 </ul>
             </div>
         @endif
-        
+
         <div class="container-fluid mt-5">
             <h1 class="text-center mb-4">Event Management</h1>
             <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addEventModal">Add
