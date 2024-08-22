@@ -16,6 +16,7 @@ class Event extends Model
         'description',
         'date_time',
         'location',
+        'price',
         'user_id'
     ];
 

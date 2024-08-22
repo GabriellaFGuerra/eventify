@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->dateTime('date_time');
             $table->string('location');
+            $table->double('price');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

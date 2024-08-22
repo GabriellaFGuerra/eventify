@@ -30,13 +30,19 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:8',
             'confirmPassword' => 'required|same:password',
-            'type' => 'required|in:admin,user'
+            'type' => 'required|in:admin,user',
+            'address' => 'required|string',
+            'phone' => 'required|string',
+            'birthday' => 'required|date'
         ]);
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
         $user->user_type = $request->input('type');
+        $user->address = $request->input('address');
+        $user->phone = $request->input('phone');
+        $user->birthday = $request->input('birthday');
 
         if (!$user->save()) {
             return Redirect::back()->withErrors($request->errors())->withInput($request->all());

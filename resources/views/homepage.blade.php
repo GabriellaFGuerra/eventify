@@ -18,7 +18,7 @@
                     <a class="nav-link" href="#events">Events</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#tickets">Tickets</a>
+                    <a class="nav-link" href="{{ route('mytickets') }}">Tickets</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#contact">Contact</a>
@@ -83,8 +83,12 @@
                                 <h5 class="card-title">{{ $event->name }}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">Organizerd by: {{ $event->user->name }}</h6>
                                 <p class="card-text">{{ $event->description }}</p>
-                                <p class="card-text">{{ $event->date }}</p>
-                                <a href="#tickets" class="btn btn-primary">Buy Tickets</a>
+                                <p class="card-text">When: {{ \Carbon\Carbon::parse($event->date_time)->toDayDateTimeString() }}</p>
+                                <p class="card-text">Location: {{ $event->location }}</p>
+                                <p class="card-text">Price: ${{ $event->price }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ route('tickets', $event->id) }}" class="btn btn-primary">Buy Tickets</a>
                             </div>
                         </div>
                     </div>
@@ -92,46 +96,12 @@
             </div>
         </div>
     </section>
-
-    <!-- Tickets Section -->
-    <section id="tickets" class="bg-light py-5">
-        <div class="container">
-            <h2 class="text-center mb-4">Purchase Your Tickets</h2>
-            <div class="row">
-                <!-- Ticket Card 1 -->
-                <div class="col-md-4">
-                    <div class="ticket-card text-center">
-                        <h4 class="mb-3">Standard Ticket</h4>
-                        <p>$50</p>
-                        <a href="#" class="btn btn-primary">Buy Now</a>
-                    </div>
-                </div>
-                <!-- Ticket Card 2 -->
-                <div class="col-md-4">
-                    <div class="ticket-card text-center">
-                        <h4 class="mb-3">VIP Ticket</h4>
-                        <p>$100</p>
-                        <a href="#" class="btn btn-primary">Buy Now</a>
-                    </div>
-                </div>
-                <!-- Ticket Card 3 -->
-                <div class="col-md-4">
-                    <div class="ticket-card text-center">
-                        <h4 class="mb-3">Group Ticket</h4>
-                        <p>$200</p>
-                        <a href="#" class="btn btn-primary">Buy Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Contact Section -->
     <section id="contact" class="py-5">
         <div class="container text-center">
             <h2 class="mb-4">Contact Us</h2>
             <p>If you have any questions, feel free to reach out to us.</p>
-            <a href="mailto:info@eventify.com" class="btn btn-secondary">Email Us</a>
+            <a href="/" class="btn btn-secondary">Email Us</a>
         </div>
     </section>
 

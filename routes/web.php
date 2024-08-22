@@ -23,8 +23,9 @@ Route::prefix('/dashboard')->group(function () {
 
 Route::get('/', [TicketController::class, 'index'])->name('homepage');
 Route::prefix('/')->group(function () {
-    Route::get('/tickets', [TicketController::class, 'create'])->name('tickets');
-    Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
+    Route::get('/tickets/{id}', [TicketController::class, 'create'])->name('tickets');
+    Route::post('/tickets/{id}', [TicketController::class, 'store'])->name('tickets.store');
+    Route::get('/mytickets', [TicketController::class, 'show'])->name('mytickets');
 })->middleware('auth');
 
 

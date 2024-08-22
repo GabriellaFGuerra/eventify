@@ -42,7 +42,8 @@ class EventController extends Controller
             'event_name' => 'required',
             'event_description' => 'required',
             'event_datetime' => 'required',
-            'event_location' => 'required'
+            'event_location' => 'required',
+            'event_price' => 'required|numeric'
         ]);
 
         $event = new Event();
@@ -51,6 +52,7 @@ class EventController extends Controller
         $event->description = $request->input('event_description');
         $event->date_time = $request->input('event_datetime');
         $event->location = $request->input('event_location');
+        $event->price = $request->input('event_price');
         $event->user_id = Auth::id();
 
         if ($event->save()) {

@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('event_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->string('type');
+            $table->double('price');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }

@@ -36,17 +36,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @isset($attendees)
-                        @foreach ($attendees as $attendee)
+                    @foreach ($attendees as $attendee)
+                        @foreach ($tickets as $ticket)
                             <tr>
-                                <td>{{ $attendee->user()->name }}</td>
-                                <td>{{ $attendee->user()->email }}</td>
-                                <td>{{ $attendee->user()->phone }}</td>
-                                <td>{{ $attendee->event()->name }}</td>
+                                <td>{{ $attendee->name }}</td>
+                                <td>{{ $attendee->email }}</td>
+                                <td>{{ $attendee->phone }}</td>
+                                <td>{{ $ticket->event->name }}</td>
                                 <td>{{ $attendee->feedback }}</td>
                             </tr>
                         @endforeach
-                    @endisset
+                    @endforeach
                 </tbody>
             </table>
         </div>

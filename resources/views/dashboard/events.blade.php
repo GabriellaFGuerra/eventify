@@ -63,6 +63,7 @@
                         <th>Event Name</th>
                         <th>Date/Time</th>
                         <th>Location</th>
+                        <th>Price</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -72,13 +73,15 @@
                             <td>{{ $event->name }}</td>
                             <td>{{ \Carbon\Carbon::parse($event->date_time)->toDayDateTimeString() }}</td>
                             <td>{{ $event->location }}</td>
+                            <td>${{ $event->price }}</td>
                             <td>
                                 <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#editEventModal{{ $event->id }}">Edit</button>
                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#cancelEventModal{{ $event->id }}">Cancel event</button>
                             </td>
-                        </tr><!-- Cancel Event Modal -->
+                        </tr>
+                        <!-- Cancel Event Modal -->
                         <div class="modal fade" id="cancelEventModal{{ $event->id }}" tabindex="-1"
                             aria-labelledby="cancelEventModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -118,26 +121,31 @@
                                         @csrf
                                         <div class="modal-body">
                                             <div class="mb-3">
-                                                <div class="mb-3">
-                                                    <label for="eventName" class="form-label">Event Name</label>
+                                                <div class="mb-3 form-floating">
                                                     <input type="text" class="form-control" id="eventName"
                                                         name="event_name" value="{{ $event->name }}">
+                                                    <label for="eventName" class="form-label">Event Name</label>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="eventDescription" class="form-label">Event
-                                                        Description</label>
+                                                <div class="mb-3 form-floating">
                                                     <input type="text" class="form-control" id="eventDescription"
                                                         name="event_description" value="{{ $event->description }}">
+                                                    <label for="eventDescription" class="form-label">Event
+                                                        Description</label>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="eventDate" class="form-label">Date</label>
+                                                <div class="mb-3 form-floating">
                                                     <input type="datetime-local" class="form-control" id="eventDate"
                                                         name="event_datetime" value="{{ $event->date_time }}">
+                                                    <label for="eventDate" class="form-label">Date</label>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="eventLocation" class="form-label">Location</label>
+                                                <div class="mb-3 form-floating">
                                                     <input type="text" class="form-control" id="eventLocation"
                                                         name="event_location" value="{{ $event->location }}">
+                                                    <label for="eventLocation" class="form-label">Location</label>
+                                                </div>
+                                                <div class="mb-3 form-floating">
+                                                    <label for="eventPrice" class="form-label">Price</label>
+                                                    <input type="number" step="0.01" class="form-control"
+                                                        id="eventPrice" name="event_price" value="{{ $event->price }}">
                                                 </div>
 
                                             </div>
@@ -166,25 +174,35 @@
                 <form method="POST" action="{{ route('events.store') }}">
                     @csrf
                     <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="eventName" class="form-label">Event Name</label>
+                        <div class="mb-3 form-floating">
                             <input type="text" class="form-control" id="eventName" name="event_name"
                                 value="{{ old('event_name') }}">
+                            <label for="eventName" class="form-label">Event Name</label>
                         </div>
-                        <div class="mb-3">
-                            <label for="eventDescription" class="form-label">Event Description</label>
+                        <div class="mb-3 form-floating">
                             <input type="text" class="form-control" id="eventDescription" name="event_description"
                                 value="{{ old('event_description') }}">
+                            <label for="eventDescription" class="form-label">Event Description</label>
                         </div>
-                        <div class="mb-3">
-                            <label for="eventDate" class="form-label">Date</label>
+                        <div class="mb-3 form-floating">
                             <input type="datetime-local" class="form-control" id="eventDate" name="event_datetime"
                                 value="{{ old('event_datetime') }}">
+                            <label for="eventDate" class="form-label">Date</label>
                         </div>
-                        <div class="mb-3">
-                            <label for="eventLocation" class="form-label">Location</label>
+                        <div class="mb-3 form-floating">
                             <input type="text" class="form-control" id="eventLocation" name="event_location"
                                 value="{{ old('event_location') }}">
+                            <label for="eventLocation" class="form-label">Location</label>
+                        </div>
+
+                        <div class="mb-3 input-group">
+                            <span class="input-group-text">$</span>
+                            <div class="form-floating">
+                                <input type="number" step="0.01" class="form-control" id="eventPrice"
+                                    name="event_price" value="{{ old('event_price') }}">
+                                <label for="eventPrice" class="form-label">Price</label>
+                            </div>
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -195,6 +213,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection

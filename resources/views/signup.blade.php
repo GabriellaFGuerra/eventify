@@ -4,34 +4,6 @@
 @endsection
 
 @section('content')
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-        }
-
-        .signup-form {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-        }
-
-        .signup-form h2 {
-            margin-bottom: 20px;
-        }
-
-        .signup-form .form-check-label {
-            margin-bottom: 10px;
-        }
-    </style>
-
-
     <div class="container">
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -52,45 +24,62 @@
             </div>
         @endif
 
-        <div class="row justify-content-center signup-form">
+        <div class="row justify-content-center">
             <div class="col-md-6">
+                <h1 class="text-center mb-4">Eventify</h1>
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <h2 class="text-center mb-4">Sign Up</h2>
                         <form action="/signup" method="POST">
                             @csrf
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
+                            <div class="mb-3 form-floating">
                                 <input type="text" class="form-control" name="name" id="name"
                                     placeholder="Enter your name" value="{{ old('name') }}">
+                                <label for="name" class="form-label">Name</label>
                             </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email address</label>
+                            <div class="mb-3 form-floating">
                                 <input type="email" class="form-control" name="email" id="email"
                                     placeholder="Enter your email" value="{{ old('email') }}">
+                                <label for="email" class="form-label">Email address</label>
                             </div>
-                            <div class="mb-3">
-                                <label for="type" class="form-label">Are you an Event Organizer or a User?</label>
+                            <div class="mb-3 form-floating">
+                                <input type="text" class="form-control" name="phone" id="phone"
+                                    placeholder="Enter your phone" value="{{ old('phone') }}">
+                                <label for="phone" class="form-label">Phone</label>
+                            </div>
+                            <div class="mb-3 form-floating">
+                                <input type="text" class="form-control" name="address" id="address"
+                                    placeholder="Enter your address" value="{{ old('address') }}">
+                                <label for="address" class="form-label">Address</label>
+                            </div>
+                            <div class="mb-3 form-floating">
+                                <input type="date" class="form-control" name="birthday" id="birthday"
+                                    value="{{ old('birthday') }}">
+                                <label for="birthday" class="form-label">Birthday</label>
+                            </div>
+                            <div class="mb-3 form-floating">
                                 <select name="type" class="form-select" id="type">
                                     <option value="admin">Organizer</option>
                                     <option value="user">User</option>
                                 </select>
+                                <label for="type" class="form-label">Are you an Event Organizer or a User?</label>
                             </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
+                            <div class="mb-3 form-floating">
                                 <input type="password" class="form-control" name="password" id="password"
                                     placeholder="Enter your password">
+                                <label for="password" class="form-label">Password</label>
                             </div>
-                            <div class="mb-3">
-                                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <div class="mb-3 form-floating">
                                 <input type="password" class="form-control" name="confirmPassword" id="confirmPassword"
                                     placeholder="Confirm your password">
+                                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            </div>
+
+                            <div class="d-grid mb-3 gap-2">
+                                <a href="/login" class="btn btn-link btn-link-custom">Already have an account? Login here</a>
                             </div>
 
                             <div class="d-grid gap-2">
-                                <div class="mb-3">
-                                    <a href="/login" class="text-decoration-none">Already have an account? Login here</a>
-                                </div>
                                 <button type="submit" class="btn btn-primary">Sign Up</button>
                             </div>
                         </form>
