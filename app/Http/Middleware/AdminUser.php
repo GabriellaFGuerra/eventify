@@ -16,6 +16,10 @@ class AdminUser
      */
     public function handle($request, Closure $next)
     {
+        if (!Auth::user()) {
+            return redirect('/login');
+        }
+
         if (Auth::user()->user_type == 'admin') {
             return $next($request);
         }
