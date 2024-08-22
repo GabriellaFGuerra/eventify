@@ -15,7 +15,7 @@ Eventify is a Laravel application designed to help you manage events with ease.
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/eventify.git
+   git clone https://github.com/GabriellaFGuerra/eventify.git
    ```
 
 2. **Install dependencies:**
