@@ -27,6 +27,8 @@
     </nav>
 
     <div class="container">
+        
+
         <h1 class="mt-5">My Tickets</h1>
         <table class="table table-striped table-hover mt-4">
             <thead>
@@ -36,6 +38,7 @@
                     <th>Location</th>
                     <th>Quantity</th>
                     <th>Price</th>
+                    <th>Rate</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,6 +49,10 @@
                         <td>{{ $ticket->event->location }}</td>
                         <td>{{ $ticket->quantity }}</td>
                         <td>${{ $ticket->price }}</td>
+                        @if ($ticket->event->date_time < \Carbon\Carbon::now() )
+                            <td><a class="btn btn-link" href={{ route('feedback', $ticket->event->id) }}
+                                    role="button">Rate event</a></td>
+                        @endif
                     </tr>
                 @endforeach
             </tbody>

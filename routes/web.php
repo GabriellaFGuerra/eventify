@@ -3,6 +3,7 @@
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AttendeeController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,9 @@ Route::prefix('/')->group(function () {
     Route::get('/tickets/{id}', [TicketController::class, 'create'])->name('tickets');
     Route::post('/tickets/{id}', [TicketController::class, 'store'])->name('tickets.store');
     Route::get('/mytickets', [TicketController::class, 'show'])->name('mytickets');
+
+    Route::get('/feedback/{eventId}', [FeedbackController::class, 'index'])->name('feedback');
+    Route::post('/feedback/{eventId}', [FeedbackController::class, 'store'])->name('feedback.store');
 })->middleware('auth');
 
 
