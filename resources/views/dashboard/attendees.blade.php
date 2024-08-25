@@ -38,22 +38,18 @@
                 </thead>
                 <tbody>
                     @foreach ($tickets as $ticket)
-                        @foreach ($attendees as $attendee)
-                            @foreach ($feedbacks as $feedback)
-                                <tr>
-                                    <td>{{ $attendee->name }}</td>
-                                    <td>{{ $attendee->email }}</td>
-                                    <td>{{ $attendee->phone }}</td>
-                                    <td>{{ $ticket->event->name }}</td>
-                                    <td>{{ $ticket->quantity }}</td>
-                                    @if ($feedback->user_id == $attendee->id && $feedback->event_id == $ticket->event_id)
-                                        <td>{{ $feedback->rating }}</td>
-                                    @else
-                                    <td>No ratings</td>
-                                    @endif
-                                </tr>
-                            @endforeach
-                        @endforeach
+                        <tr>
+                            <td>{{ $ticket->user->name }}</td>
+                            <td>{{ $ticket->user->email }}</td>
+                            <td>{{ $ticket->user->phone }}</td>
+                            <td>{{ $ticket->event->name }}</td>
+                            <td>{{ $ticket->quantity }}</td>
+                            @if ($feedback->user_id == $attendee->id && $feedback->event_id == $ticket->event_id)
+                                <td>{{ $feedback->rating }}</td>
+                            @else
+                                <td>No ratings</td>
+                            @endif 
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

@@ -12,13 +12,9 @@ class AttendeeController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
-        $events = $user->events;
-        $tickets = Ticket::whereIn('event_id', $events->pluck('id'))->get();
-        $attendees = $tickets->map(function ($ticket) {
-            return $ticket->user;
-        })->unique('id');
-        $feedbacks = Feedback::whereIn('event_id', $events->pluck('id'))->get();
-        return view('dashboard.attendees', ['attendees' => $attendees, 'tickets' => $tickets, 'feedbacks' => $feedbacks]);
+        $tickets = Ticket::with(['event', 'user'])->get();
+        $feedback = Feedback::with(['event', 'user'])->get();
+
+        return view('dashboard.attendees', ['tickets' => $tickets]);
     }
 }
