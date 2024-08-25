@@ -26,7 +26,7 @@
 
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <h1 class="text-center mb-4">Eventify</h1>
+                <h1 class="text-center mb-4 py-5"><a href="/" class="text-decoration-none text-dark">Eventify</a></h1>
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <h2 class="text-center mb-4">Sign Up</h2>
