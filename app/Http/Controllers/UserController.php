@@ -12,17 +12,11 @@ use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return route('signup');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request): RedirectResponse
     {
         $validate = $request->validate([
@@ -35,6 +29,10 @@ class UserController extends Controller
             'phone' => 'required|string',
             'birthday' => 'required|date'
         ]);
+        if (!$validate) {
+            return Redirect::back()->withErrors($request->errors())->withInput($request->all());
+        }
+
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
@@ -53,7 +51,7 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
+        $validate = $request->validate([
             'email' => 'required|email|exists:users',
             'password' => 'required'
         ]);
