@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class EventController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $events = Event::where('user_id', Auth::id());
@@ -24,18 +21,12 @@ class EventController extends Controller
         return view('dashboard.dashboard', ['events' => $events, 'tickets' => $tickets]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $events = Event::where('user_id', Auth::id());
         return view('dashboard.events', ['events' => $events]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -62,9 +53,6 @@ class EventController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $event)
     {
         $request->validate([
@@ -87,12 +75,9 @@ class EventController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($event)
     {
-        if(Event::find($event)) {
+        if (Event::find($event)) {
             Event::where('id', $event)->delete();
             return redirect()->route('events')->with('success', 'Event deleted successfully.');
         } else {
