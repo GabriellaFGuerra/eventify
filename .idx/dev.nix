@@ -14,16 +14,11 @@
   idx = {
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
-      # "vscodevim.vim"
-      "alexcvzz.vscode-sqlite"
       "amiralizadeh9480.laravel-extra-intellisense"
       "bmewburn.vscode-intelephense-client"
       "bradlc.vscode-tailwindcss"
       "christian-kohler.path-intellisense"
       "codingyu.laravel-goto-view"
-      "cweijan.dbclient-jdbc"
-      "cweijan.vscode-database-client2"
-      "cweijan.vscode-mysql-client2"
       "EditorConfig.EditorConfig"
       "esbenp.prettier-vscode"
       "felixfbecker.php-debug"
@@ -51,6 +46,7 @@
       "wongjn.php-sniffer"
       "xabikos.JavaScriptSnippets"
       "zhuangtongfa.material-theme"
+      "porifa.laraphense"
     ];
     workspace = {
       # Runs when a workspace is first created with this `dev.nix` file
